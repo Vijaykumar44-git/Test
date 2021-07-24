@@ -8,7 +8,7 @@ pipeline {
     }
     stage ('Test') {
       steps {
-        echo " Test started and finished ... "
+        echo " Test started and finished .... "
       }
     }
     }
