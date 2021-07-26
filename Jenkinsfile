@@ -22,7 +22,7 @@ pipeline {
     }
     post {
         always {
-            echo "I will always executed"
+            echo "I will always executed.."
         }
         success {
             echo " I will only executed when job is success"
