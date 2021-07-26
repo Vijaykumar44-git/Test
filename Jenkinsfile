@@ -1,15 +1,31 @@
 pipeline {
-  agent any
-  stages {
-    stage ('Build') {
-      steps {
-        echo " Build started and finished "
-      }
+    agent any
+    environment {
+        Name="Vijay"
+        secret=credentials('Test')
     }
-    stage ('Test') {
-      steps {
-        echo " Test started and finished .... "
-      }
+    parameters {
+        choice(name: 'VERSION', choices: ['1.0','2.0','3.0'], description: 'Choices given')
+        booleanParam(name: 'et', defaultValue: true, description: 'Boolean Value')
     }
+    stages {
+        stage ('Build') {
+            when {
+                expression {
+                    params.et
+                }
+            }
+            steps {
+                sh 'echo "building...by $Name, $secret"'
+            }
+        }
+    }
+    post {
+        always {
+            echo "I will always executed"
+        }
+        success {
+            echo " I will only executed when job is success"
+        }
     }
 }
